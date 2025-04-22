@@ -42,7 +42,7 @@ for addr in "${new_addresses[@]}"; do
 		FMT_IPCMD="iptables"
 	fi
 
-	if ! sudo "$FMT_IPCMD" -n -t raw -C PREROUTING -s "$addr" -j DROP &>/dev/null; then
+	if ! sudo "$FMT_IPCMD" -t raw -C PREROUTING -s "$addr" -j DROP &>/dev/null; then
 		if [[ "$FMT_LOGS" ]]; then
 			"$FMT_IPCMD" -t raw -A PREROUTING -s "$addr" -j LOG --log-prefix "Blocked RUGOV IP attempt: "
 		fi
